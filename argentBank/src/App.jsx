@@ -1,33 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+// import { useState } from 'react'
+import { NavLink, Outlet } from 'react-router-dom';
+import './style/App.css'
+// 
+export function App() {
+  // const [user, setUser] = useState(null)
   return (
     <>
+    <nav className="main-nav">
+      <div className="main-nav-logo" >
+        <NavLink to="/">
+          <img
+            className="main-nav-logo-image"
+            src="./img/argentBankLogo.png"
+            alt="Argent Bank Logo"
+          />
+          <h1 className="sr-only">Argent Bank</h1>
+        </NavLink>
+      </div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <div className="main-nav-item">
+          <NavLink to="/login">
+            <i className="fa fa-user-circle"></i>
+            Sign In
+          </NavLink>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    </nav>
+    {/* main */}
+    <Outlet/>
+    <footer className="footer">
+      <p className="footer-text">Copyright 2020 Argent Bank</p>
+    </footer>
     </>
   )
 }
