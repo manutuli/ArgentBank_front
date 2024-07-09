@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import { createUser } from "../redux/features/authentication/authSlice"
 import { editNameFormValidation } from "../utils/editNameFormValidation"
-// 
+import { useState } from "react"
 export function EditNameForm(){
     const dispatch = useDispatch()
     const user = useSelector((state) => state.authentication.value)
+    const [isSuccess, setIsSuccess]= useState(false)
     function submit(e){
         e.preventDefault()
         const form = editNameFormValidation(e.target) 
@@ -24,7 +25,7 @@ export function EditNameForm(){
                 const response = await fetch(request)
                 const res = await response.json()
                 const {id, email} = res.body
-                console.log("new credentials : ", form.firstName, email, id)
+                console.log("new credentials : ", email, id)
                 dispatch(createUser({
                     ...user, 
                     data: {
@@ -33,6 +34,7 @@ export function EditNameForm(){
                         lastName: form.lastName,
                     }
                 }))
+                setIsSuccess(true)
             } catch (error) {
                 console.log("Erreur dans startFetching : ", error)
             }
@@ -40,9 +42,11 @@ export function EditNameForm(){
         startFetching()
     }
     return (
-        <section className="sign-in-content">
+        isSuccess
+        ? <p>Your last name is {user.data.lastName} !</p>
+        : <section className="sign-in-content">
             <i className="fa fa-user-circle sign-in-icon"></i>
-            <h1>Change your name : </h1>
+            <h2>Please enter your name : </h2>
             <form  onSubmit={submit}>
                     <div className="input-wrapper">
                         <label htmlFor="firstname">firstname</label>

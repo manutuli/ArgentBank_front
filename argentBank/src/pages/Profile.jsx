@@ -24,6 +24,7 @@ export function Profile(){
             const response = await fetch(request)
             const res = await response.json()
             const data = {...res.body}
+            console.log("profile : ", res.message, data)
             dispatch(login({...user, isLogged : true}))
             dispatch(createUser({...user, data : data}))
         } catch (error) {
@@ -31,21 +32,22 @@ export function Profile(){
         }
     }
     fetchProfile()
-    console.log("profile : ", user)
-    // function handleBtnEditName(e){
-    //     e.preventDefault()
-    //     e.target.
-    // }
     return ( 
         <>
             <main className="main bg-dark">
                 <div className="header">
                     <h1>Welcome back<br />{user.data?.firstName}</h1>
-                    {/* <h1>Welcome back<br />{data.firstName ? data.firstName : "Jarvis!"}</h1> */}
-                    <button onClick={() => {isHidden ? setHidden(false) : setHidden(true)}} className="edit-button">Edit Name</button>
-                    {/* {console.log("profile : ", user)}  */}
+                    {
+                        isHidden 
+                        ? <button 
+                            onClick={() => {isHidden ? setHidden(false) : setHidden(true)}} 
+                            className="edit-button"
+                        >
+                            Edit Name
+                        </button>
+                        : <EditNameForm /> 
+                    }
                 </div>
-                {isHidden ? <EditNameForm /> : <span>-__-</span>}
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">
                     <div className="account-content-wrapper">
