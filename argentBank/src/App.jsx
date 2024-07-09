@@ -1,9 +1,9 @@
-// import { useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom';
 import './style/App.css'
+import { NavLink, Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // 
 export function App() {
-  // const [user, setUser] = useState(null)
+  const user = useSelector((state)=>state.authentication.value)
   return (
     <>
     <nav className="main-nav">
@@ -19,15 +19,14 @@ export function App() {
       </div>
       <div>
         <div className="main-nav-item">
-          <NavLink to="/login">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </NavLink>
+          { user.isLogged 
+          ? <NavLink to="/" reloadDocument><p>Log Out</p></NavLink> 
+          : <NavLink to="/login" ><p>Sign In</p></NavLink> }
         </div>
       </div>
     </nav>
     {/* main */}
-    <Outlet/>
+    <Outlet />
     <footer className="footer">
       <p className="footer-text">Copyright 2020 Argent Bank</p>
     </footer>

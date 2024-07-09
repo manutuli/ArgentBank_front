@@ -2,30 +2,42 @@ import {
     createBrowserRouter,
   } from "react-router-dom";
   import App from './App.jsx'
-  import {Login} from "./pages/Login.jsx"
+  import {Signup} from "./pages/Signup.jsx"
   import {Profile} from "./pages/Profile.jsx"
-  import { Landing } from './pages/Landing.jsx';
-  
+  import {Login} from "./pages/Login.jsx"
+  import { Landing } from './pages/Landing.jsx'
+  // import {RequireAuth} from './pages/RequireAuth.jsx'
+  // import { useFetch } from "./utils/useFetch";
   import './style/index.css'
   
   export const router = createBrowserRouter([
     {
       element : <App/>,
+      errorElement : <div>Erreur 404</div>,
       children : [
         {
           path : "/",
           element : <Landing />,
+          errorElement : <div>Erreur 404, Home not found</div>,
           loader : console.log("landing")
         },
         {
           path : "/login",
           element : <Login />,
-          loader : console.log("login")
+          errorElement : <div>Erreur 404, Login not found</div>,
+          loader : console.log("login"),
+        },
+        {
+          path : "/signup",
+          element : <Signup />,
+          errorElement : <div>Erreur 404, Signup not found</div>,
+          loader : console.log("signup"),
         },
         {
           path : "/profile",
-          element : <Profile />,
-          loader : console.log("profile")
+          element : <Profile/>,
+          errorElement : <div>Erreur 404, Profile not found</div>,
+          loader : console.log("profile"),
         },
       ],
     },

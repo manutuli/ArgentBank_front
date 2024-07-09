@@ -1,18 +1,10 @@
-// 
+// import { useLocalStorage } from "./useLocalStorage"
+// import { useFetch } from "./useFetch"
 export function formValidation(event) {
-    console.log(event.remember)
-    // if (
-    //     !event.email.value ||
-    //     !event.firstname.value ||
-    //     !event.lastname.value ||
-    //     !event.password.value ||
-    //     event.remember.value !== "string" 
-    // ) return console.log("erreur de validation");
-    // 
     if (
-        event.email.checkValidity() ||
-        event.firstname.checkValidity() ||
-        event.lastname.checkValidity() ||
+        event.email.checkValidity() &&
+        event.firstname.checkValidity() &&
+        event.lastname.checkValidity() &&
         event.password.checkValidity() 
     ) {
         return {
@@ -20,10 +12,10 @@ export function formValidation(event) {
             firstname : event.firstname.value,
             lastname : event.lastname.value,
             password : event.password.value,
-            isRemember : event.remember.value === "on" ? false : true,
+            isRemember : event.remember.checked ? "yes" : "no",
         }
     } else {
-        return "erreur de validation (checkValidity)"
+        return {error : "erreur de validation (checkValidity)"}
     }
     // if (
     //     !event.email.value ||
