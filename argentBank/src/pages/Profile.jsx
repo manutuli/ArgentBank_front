@@ -2,11 +2,15 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createUser, login } from "../redux/features/authentication/authSlice"
 import { EditNameForm } from "../components/EditNameForm"
-// 
+import { useNavigate } from "react-router-dom"
 export function Profile(){
     const [isHidden, setHidden] = useState(true)
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.authentication.value)
+    const sessionStorage = window.sessionStorage
+    const token = sessionStorage.getItem("token") || user.token ;
+    if (!token) return navigate("/login", {replace: true});
     const controller = new AbortController()
     const signal = controller.signal
     const url = "http://localhost:3001/api/v1/user/profile"
@@ -14,17 +18,17 @@ export function Profile(){
         method  : 'POST',
         headers : {
             "accept" : "application/json",
-            "Authorization" : "Bearer " + user.token
+            "Authorization" : "Bearer " + token
         },
         signal: signal,
     })
     const fetchProfile = async () => {
         try {
-            if (user.data) return ()=> controller.abort()
+            if (user.data) return ()=> controller.abort();
             const response = await fetch(request)
             const res = await response.json()
             const data = {...res.body}
-            console.log("profile : ", res.message, data)
+            // console.log("profile : ", res.message, data)
             dispatch(login({...user, isLogged : true}))
             dispatch(createUser({...user, data : data}))
         } catch (error) {

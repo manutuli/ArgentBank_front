@@ -12,6 +12,7 @@ export function Login() {
     function submit(e){
         e.preventDefault()
         const form = loginFormValidation(e.target) 
+        const isRemember = form.isRemember
         const url = "http://localhost:3001/api/v1/user/login"
         const fetchToken = async () => {
             try {
@@ -27,6 +28,12 @@ export function Login() {
                     }))
                 const res = await response.json()
                 const token = res.body
+                if (isRemember) {
+                    const sessionStorage = window.sessionStorage
+                    sessionStorage.setItem("token", token["token"])
+                    dispatch(remember({...user, isRemember: isRemember}))
+                    // console.log("session token : ", sessionStorage.getItem("token"))
+                }
                 dispatch(createToken({...user, ...token}))
                 navigate('/profile', {replace: true})
             } catch (error) {
@@ -35,8 +42,6 @@ export function Login() {
             }
         }
         fetchToken()
-        const isRemember = form.isRemember
-        dispatch(remember({...user, isRemember: isRemember}))        
     }
     return (
         <>

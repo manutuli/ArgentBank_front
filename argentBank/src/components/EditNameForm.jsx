@@ -20,13 +20,13 @@ export function EditNameForm(){
             },
             body : JSON.stringify({...form})
         })
-        const startFetching = async () => {
+        const fetchName = async () => {
             try {
                 const response = await fetch(request)
                 const res = await response.json()
                 const {id, email} = res.body
                 console.log("new credentials : ", email, id)
-                dispatch(createUser({
+                if (id && email) dispatch(createUser({
                     ...user, 
                     data: {
                         ...user.data,
@@ -36,10 +36,10 @@ export function EditNameForm(){
                 }))
                 setIsSuccess(true)
             } catch (error) {
-                console.log("Erreur dans startFetching : ", error)
+                console.log("Erreur dans fetchName : ", error)
             }
         }
-        startFetching()
+        fetchName()
     }
     return (
         isSuccess
