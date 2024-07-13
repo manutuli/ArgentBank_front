@@ -28,7 +28,6 @@ export function Profile(){
             const response = await fetch(request)
             const res = await response.json()
             const data = {...res.body}
-            // console.log("profile : ", res.message, data)
             dispatch(login({...user, isLogged : true}))
             dispatch(createUser({...user, data : data}))
         } catch (error) {

@@ -1,5 +1,7 @@
-// 
+import { NavLink } from "react-router-dom"
+import { useSelector } from "react-redux"
 export const Landing = () => {
+  const user = useSelector((state)=>state.authentication.value)
     return (
         <main>
         <div className="hero">
@@ -9,6 +11,10 @@ export const Landing = () => {
             <p className="subtitle">No minimum deposit.</p>
             <p className="subtitle">High interest rates.</p>
             <p className="text">Open a savings account with Argent Bank today!</p>
+            {user.isLogged 
+              ? <NavLink to="/profile" >Return To Your Profile</NavLink>
+              : <NavLink to="/signup" ><p>Sign Up</p></NavLink>
+            }
           </section>
         </div>
         <section className="features">

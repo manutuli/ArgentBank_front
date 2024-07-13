@@ -1,6 +1,6 @@
 // import { useLocalStorage } from "./useLocalStorage"
 // import { useFetch } from "./useFetch"
-export function formValidation(event) {
+export function signupFormValidation(event) {
     if (
         event.email.checkValidity() &&
         event.firstname.checkValidity() &&

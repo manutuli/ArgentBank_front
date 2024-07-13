@@ -16,7 +16,8 @@ export function EditNameForm(){
             method  : 'PUT',
             headers : {
                 "accept" : "application/json",
-                "Authorization" : "Bearer " + user.token
+                "Authorization" : "Bearer " + user.token,
+                "Content-Type" : "application/json"
             },
             body : JSON.stringify({...form})
         })
@@ -24,17 +25,17 @@ export function EditNameForm(){
             try {
                 const response = await fetch(request)
                 const res = await response.json()
-                const {id, email} = res.body
-                console.log("new credentials : ", email, id)
-                if (id && email) dispatch(createUser({
+                const {id, email, firstName, lastName,} = res.body
+                console.log("new credentials : ", email, id, firstName, lastName)
+                dispatch(createUser({
                     ...user, 
                     data: {
                         ...user.data,
-                        firstName: form.firstName, 
-                        lastName: form.lastName,
+                        firstName: firstName, 
+                        lastName: lastName, 
                     }
                 }))
-                setIsSuccess(true)
+                if (res.ok) setIsSuccess(true)
             } catch (error) {
                 console.log("Erreur dans fetchName : ", error)
             }

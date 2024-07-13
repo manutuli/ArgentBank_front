@@ -4,7 +4,6 @@ export const editNameFormValidation = (event) => {
         event.lastname.value
     ) 
     {
-        // console.log("edit name : ", event.firstname.value)
         return {
             firstName : event.firstname.value,
             lastName : event.lastname.value,

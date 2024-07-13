@@ -1,32 +1,44 @@
-// import { useState } from "react";
-// import { formValidation } from "../utils/formValidation";
-// import { useDispatch, useSelector } from "react-redux";
-// import { addUser } from "../redux/features/authentication/authSlice";
+import { useNavigate } from "react-router-dom";
+import { signupFormValidation } from "../utils/signupFormValidation";
 export function Signup() {
-    // const [data, setData] = useState("no data :(")
-    // const dispatch = useDispatch()
-    // const user = useSelector((state) => state.authentication)
+    const navigate = useNavigate()
+    function submit(e) {
+        e.preventDefault()
+        const url = "http://localhost:3001/api/v1/user/signup"
+        const form = signupFormValidation(e.target)
+        const request = new Request(url, {
+            headers : {
+                "accept" : "application/json",
+                "Content-Type" : "application/json"
+            },
+            method : 'POST',
+            body : JSON.stringify({
+                "email" : form.email,
+                "password" : form.password,
+                "firstName" : form.firstname,
+                "lastName" : form.lastname
+            }),
+    })
+        const fetchSignup = async ()=>{
+            try {
+                const response = await fetch(request)
+                const res = await response.json()
+                const {email} = res.body
+                console.log("signup credentials : ", email)
+                navigate("/login", {replace: true})
+            } catch (error) {
+                console.log("Dans fetch signup", error)
+            }
+        }
+        fetchSignup()
+    }
     return (
         <>
             <main className="main bg-dark">
             <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
-                <h1>Sign In</h1>
-                <form  onSubmit={(e)=>{
-                    e.preventDefault()
-                    // const url = "http://localhost:3001/api/v1/user/signup"
-                    // const form = formValidation(e.target)
-                    // const request = new Request({
-                    //     url,
-                    //     method : 'POST',
-                    //     body : {
-                    //         "email" : form.email,
-                    //         "password" : form.password,
-                    //         "firstName" : form.firstname,
-                    //         "lastName" : form.lastname
-                    //     },
-                    // })
-                }}>
+                <h1>Create new Account</h1>
+                <form  onSubmit={submit}>
                     <div className="input-wrapper">
                         <label htmlFor="email">email</label>
                         <input type="email" id="email" required aria-required="true"/>

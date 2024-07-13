@@ -32,7 +32,6 @@ export function Login() {
                     const sessionStorage = window.sessionStorage
                     sessionStorage.setItem("token", token["token"])
                     dispatch(remember({...user, isRemember: isRemember}))
-                    // console.log("session token : ", sessionStorage.getItem("token"))
                 }
                 dispatch(createToken({...user, ...token}))
                 navigate('/profile', {replace: true})
