@@ -6,9 +6,6 @@ import {
   import {Profile} from "./pages/Profile.jsx"
   import {Login} from "./pages/Login.jsx"
   import { Landing } from './pages/Landing.jsx'
-  // import {RequireAuth} from './pages/RequireAuth.jsx'
-  // import { useFetch } from "./utils/useFetch";
-  import './style/index.css'
   
   export const router = createBrowserRouter([
     {
@@ -19,25 +16,25 @@ import {
           path : "/",
           element : <Landing />,
           errorElement : <div>Erreur 404, Home not found</div>,
-          loader : console.log("landing")
+          // loader : console.log("landing")
         },
         {
           path : "/login",
           element : <Login />,
           errorElement : <div>Erreur 404, Login not found</div>,
-          loader : console.log("login"),
+          // loader : console.log("login"),
         },
         {
           path : "/signup",
           element : <Signup />,
           errorElement : <div>Erreur 404, Signup not found</div>,
-          loader : console.log("signup"),
+          // loader : console.log("signup"),
         },
         {
           path : "/profile",
           element : <Profile/>,
           errorElement : <div>Erreur 404, Profile not found</div>,
-          loader : console.log("profile"),
+          // loader : console.log("profile"),
         },
       ],
     },

@@ -18,7 +18,7 @@ export function Signup() {
                 "firstName" : form.firstname,
                 "lastName" : form.lastname
             }),
-    })
+        });
         const fetchSignup = async ()=>{
             try {
                 const response = await fetch(request)

@@ -25,7 +25,7 @@ export function Login() {
                         },
                         signal : signal,
                         body : JSON.stringify({...form})
-                    }))
+                    }));
                 const res = await response.json()
                 const token = res.body
                 if (isRemember) {

@@ -1,4 +1,3 @@
-import './style/App.css'
 import { NavLink, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // 
@@ -9,19 +8,30 @@ export function App() {
     <nav className="main-nav">
       <div className="main-nav-logo" >
         <NavLink to="/">
-          <img
-            className="main-nav-logo-image"
-            src="./img/argentBankLogo.png"
+          <img 
+            src="assets/img/argentBankLogo.png"
             alt="Argent Bank Logo"
+            className="main-nav-logo-image"
           />
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
       </div>
       <div>
         <div className="main-nav-item">
-          { user.isLogged 
-          ? <NavLink to="/" reloadDocument><p>Log Out</p></NavLink> 
-          : <NavLink to="/login" ><p>Sign In</p></NavLink> }
+          {
+            user.isLogged 
+            ? <NavLink to="/profile" ><p>Return To Your Profile</p></NavLink>
+            : <NavLink to="/signup" ><p>Sign Up</p></NavLink>
+          }
+        </div>
+      </div>
+      <div>
+        <div className="main-nav-item">
+          { 
+            user.isLogged 
+            ? <NavLink to="/" reloadDocument><p>Log Out</p></NavLink> 
+            : <NavLink to="/login" ><p>Sign In</p></NavLink> 
+          }
         </div>
       </div>
     </nav>

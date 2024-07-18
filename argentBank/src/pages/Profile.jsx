@@ -21,7 +21,7 @@ export function Profile(){
             "Authorization" : "Bearer " + token
         },
         signal: signal,
-    })
+    });
     const fetchProfile = async () => {
         try {
             if (user.data) return ()=> controller.abort();
@@ -48,7 +48,7 @@ export function Profile(){
                         >
                             Edit Name
                         </button>
-                        : <EditNameForm /> 
+                        : <EditNameForm/> 
                     }
                 </div>
                 <h2 className="sr-only">Accounts</h2>

@@ -1,7 +1,4 @@
-import { NavLink } from "react-router-dom"
-import { useSelector } from "react-redux"
 export const Landing = () => {
-  const user = useSelector((state)=>state.authentication.value)
     return (
         <main>
         <div className="hero">
@@ -11,16 +8,12 @@ export const Landing = () => {
             <p className="subtitle">No minimum deposit.</p>
             <p className="subtitle">High interest rates.</p>
             <p className="text">Open a savings account with Argent Bank today!</p>
-            {user.isLogged 
-              ? <NavLink to="/profile" >Return To Your Profile</NavLink>
-              : <NavLink to="/signup" ><p>Sign Up</p></NavLink>
-            }
           </section>
         </div>
         <section className="features">
           <h2 className="sr-only">Features</h2>
           <div className="feature-item">
-            <img src="./img/icon-chat.png" alt="Chat Icon" className="feature-icon" />
+            <img src="assets/img/icon-chat.png" alt="Chat Icon" className="feature-icon" />
             <h3 className="feature-item-title">You are our #1 priority</h3>
             <p>
               Need to talk to a representative? You can get in touch through our
@@ -29,7 +22,7 @@ export const Landing = () => {
           </div>
           <div className="feature-item">
             <img
-              src="./img/icon-money.png"
+              src="assets/img/icon-money.png"
               alt="Chat Icon"
               className="feature-icon"
             />
@@ -40,7 +33,7 @@ export const Landing = () => {
           </div>
           <div className="feature-item">
             <img
-              src="./img/icon-security.png"
+              src="assets/img/icon-security.png"
               alt="Chat Icon"
               className="feature-icon"
             />
