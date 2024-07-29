@@ -1,8 +1,10 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { LogoutBtn } from './components/LogoutBtn';
 // 
 export function App() {
   const user = useSelector((state)=>state.authentication.value)
+  // 
   return (
     <>
     <nav className="main-nav">
@@ -16,20 +18,18 @@ export function App() {
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
       </div>
-      <div>
+      <div className='main-nav-content'>
         <div className="main-nav-item">
           {
             user.isLogged 
-            ? <NavLink to="/profile" ><p>Return To Your Profile</p></NavLink>
+            ? <NavLink to="/profile" ><p>{user.data.firstName}</p></NavLink>
             : <NavLink to="/signup" ><p>Sign Up</p></NavLink>
           }
         </div>
-      </div>
-      <div>
         <div className="main-nav-item">
           { 
             user.isLogged 
-            ? <NavLink to="/" reloadDocument><p>Log Out</p></NavLink> 
+            ? <LogoutBtn/> 
             : <NavLink to="/login" ><p>Sign In</p></NavLink> 
           }
         </div>

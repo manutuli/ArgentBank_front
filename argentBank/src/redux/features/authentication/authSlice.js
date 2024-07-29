@@ -9,7 +9,7 @@ export const authSlice = createSlice({
             id : 1, 
             isLogged : false, 
             token : null, 
-            isRemember: null, 
+            // isRemember: null, 
             data : null,
         },
     },

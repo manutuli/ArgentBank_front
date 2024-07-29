@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useState, } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createUser, login } from "../redux/features/authentication/authSlice"
 import { EditNameForm } from "../components/EditNameForm"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
+import { AuthLayer } from "../components/AuthLayer"
+// 
 export function Profile(){
     const [isHidden, setHidden] = useState(true)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.authentication.value)
-    const sessionStorage = window.sessionStorage
-    const token = sessionStorage.getItem("token") || user.token ;
-    if (!token) return navigate("/login", {replace: true});
+    //
+    const token = user.token
+    if (!token) return <AuthLayer/>
+    // 
     const controller = new AbortController()
     const signal = controller.signal
     const url = "http://localhost:3001/api/v1/user/profile"
@@ -24,9 +26,9 @@ export function Profile(){
     });
     const fetchProfile = async () => {
         try {
-            if (user.data) return ()=> controller.abort();
+            if (user.data ) return ()=> controller.abort();
             const response = await fetch(request)
-            const res = await response.json()
+            const res = await response.json() 
             const data = {...res.body}
             dispatch(login({...user, isLogged : true}))
             dispatch(createUser({...user, data : data}))
@@ -39,7 +41,7 @@ export function Profile(){
         <>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />{user.data?.firstName}</h1>
+                    <h1>Welcome back<br />{isHidden ? user.data?.firstName : null}</h1>
                     {
                         isHidden 
                         ? <button 

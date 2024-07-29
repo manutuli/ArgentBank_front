@@ -6,6 +6,7 @@ export function EditNameForm(){
     const dispatch = useDispatch()
     const user = useSelector((state) => state.authentication.value)
     const [isSuccess, setIsSuccess]= useState(false)
+    // 
     function submit(e){
         e.preventDefault()
         const form = editNameFormValidation(e.target) 
@@ -45,30 +46,30 @@ export function EditNameForm(){
         <>
         {isSuccess
         ? <p>Your last name is {user.data.lastName} !</p>
-        : <section className="sign-in-content">
+        : <section className="edit-name-wrapper">
             <i className="fa fa-user-circle sign-in-icon"></i>
-            <h2>Please enter your name : </h2>
+            {/* <h2>Please enter your name : </h2> */}
             <form  onSubmit={submit}>
-                <div className="input-wrapper">
-                    <label htmlFor="firstname">firstname</label>
-                    <input type="text" id="firstname" required aria-required="true"/>
+                <div className="edit-name-content">
+                    <div className="input-wrapper">
+                        {/* <label htmlFor="firstname">firstname</label> */}
+                        <input placeholder={user.data.firstName} type="text" id="firstname" required aria-required="true"/>
+                    </div>
+                    <div className="input-wrapper">
+                        {/* <label htmlFor="lastname">lastname</label> */}
+                        <input placeholder={user.data.lastName} type="text" id="lastname" required aria-required="true"/>
+                    </div>
                 </div>
-                <div className="input-wrapper">
-                    <label htmlFor="lastname">lastname</label>
-                    <input type="text" id="lastname" required aria-required="true"/>
+                <div className="edit-name-content"> 
+                    <button type="submit" className="edit-name-button">Save</button>
+                    <button className="edit-name-button" onClick={()=>setIsSuccess(true)}>Cancel</button>
                 </div>
-                {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-                {/* <NavLink to="/profile" >
-                    <div className="sign-in-button">Sign In</div>
-                </NavLink> */}
-                {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
-                <button type="submit" className="sign-in-button">Send</button>
-                <button className="sign-in-button" onClick={()=>setIsSuccess(true)}>Cancel</button>
+    
             </form>
         </section>
         }
         {isSuccess 
-         && <button  onClick={()=>setIsSuccess(false)}>Continue Editing</button>
+         && <div className="" ><button className="edit-button" onClick={()=>setIsSuccess(false)}>Edit Name</button></div> 
         }
         </>
     )

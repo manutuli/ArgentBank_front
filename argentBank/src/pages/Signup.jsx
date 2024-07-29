@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { signupFormValidation } from "../utils/signupFormValidation";
 export function Signup() {
     const navigate = useNavigate()
+    // 
     function submit(e) {
         e.preventDefault()
         const url = "http://localhost:3001/api/v1/user/signup"
@@ -25,6 +26,7 @@ export function Signup() {
                 const res = await response.json()
                 const {email} = res.body
                 console.log("signup credentials : ", email)
+                // useEffect ?
                 navigate("/login", {replace: true})
             } catch (error) {
                 console.log("Dans fetch signup", error)

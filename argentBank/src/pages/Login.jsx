@@ -1,9 +1,14 @@
 import { loginFormValidation } from "../utils/loginFormValidation";
 import { useDispatch, useSelector } from "react-redux";
-import { createToken, remember } from "../redux/features/authentication/authSlice";
+import { 
+    createToken, 
+    // remember,
+ } from "../redux/features/authentication/authSlice";
 import { useNavigate } from "react-router-dom";
+// import { useRef } from "react";
 // 
 export function Login() {
+    // const ref = useRef(0)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.authentication.value)
@@ -27,11 +32,13 @@ export function Login() {
                         body : JSON.stringify({...form})
                     }));
                 const res = await response.json()
-                const token = res.body
-                if (isRemember) {
-                    const sessionStorage = window.sessionStorage
-                    sessionStorage.setItem("token", token["token"])
-                    dispatch(remember({...user, isRemember: isRemember}))
+                const {...token} = res.body
+                if (isRemember === true) {
+                    // ref.current = token.token
+                    window.sessionStorage.setItem("token", token.token)
+                    // const sessionStorage = window.sessionStorage
+                    // console.log("session token : ", sessionStorage.getItem("token"))
+                    // dispatch(remember({...user, isRemember: isRemember}))
                 }
                 dispatch(createToken({...user, ...token}))
                 navigate('/profile', {replace: true})
