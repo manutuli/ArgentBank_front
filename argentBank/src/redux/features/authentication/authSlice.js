@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// const initialState = {
-//     value : "initial state"
-// }
+// 
 export const authSlice = createSlice({
     name : "user",
     initialState : {
@@ -9,7 +7,7 @@ export const authSlice = createSlice({
             id : 1, 
             isLogged : false, 
             token : null, 
-            // isRemember: null, 
+            // isError: null, 
             data : null,
         },
     },
@@ -26,12 +24,12 @@ export const authSlice = createSlice({
             // { type, payload } isLogged = false
             state.value.data = action.payload.data
         },
-        remember(state, action){
-            // { type, payload } isRemember = boolean
-            state.value.isRemember = action.payload.isRemember
-        },
+        // createError(state, action){
+        //     // { type, payload } isError = boolean
+        //     state.value.isError = action.payload.isError
+        // },
     }
 });
 
-export const {createUser, createToken, login, logout, remember} = authSlice.actions
+export const {createUser, createToken, login, logout} = authSlice.actions
 export default authSlice.reducer

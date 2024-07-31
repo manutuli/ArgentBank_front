@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { signupFormValidation } from "../utils/signupFormValidation";
+// import { useDispatch, useSelector } from "react-redux";
 export function Signup() {
     const navigate = useNavigate()
+    // const dispatch = useDispatch()
+    // const user = useSelector((state) => state.authentication.value)
     // 
     function submit(e) {
         e.preventDefault()
@@ -29,7 +32,9 @@ export function Signup() {
                 // useEffect ?
                 navigate("/login", {replace: true})
             } catch (error) {
-                console.log("Dans fetch signup", error)
+                // dispatch(createError({...user, isError: true}))
+                // console.log("Dans fetch signup", error)
+                navigate('/error', {replace: true})
             }
         }
         fetchSignup()

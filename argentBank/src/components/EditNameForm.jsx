@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
-import { createUser } from "../redux/features/authentication/authSlice"
+import { createUser, } from "../redux/features/authentication/authSlice"
 import { editNameFormValidation } from "../utils/editNameFormValidation"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 export function EditNameForm(){
     const dispatch = useDispatch()
     const user = useSelector((state) => state.authentication.value)
+    const navigate = useNavigate()
     const [isSuccess, setIsSuccess]= useState(false)
     // 
     function submit(e){
@@ -37,11 +40,14 @@ export function EditNameForm(){
                 }))
                 setIsSuccess(true)
             } catch (error) {
-                console.log("Erreur dans fetchName : ", error)
+                // dispatch(createError({...user, isError: true}))
+                // console.log("Erreur dans fetchName : ", error)
+                navigate('/error', {replace: true})
             }
         }
         fetchName()
     }
+    // if (user.isError) return dispatch(createError({...user, isError: false}));
     return (
         <>
         {isSuccess

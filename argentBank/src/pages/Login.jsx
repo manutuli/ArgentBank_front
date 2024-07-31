@@ -2,7 +2,7 @@ import { loginFormValidation } from "../utils/loginFormValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { 
     createToken, 
-    // remember,
+    // createError,
  } from "../redux/features/authentication/authSlice";
 import { useNavigate } from "react-router-dom";
 // import { useRef } from "react";
@@ -34,17 +34,12 @@ export function Login() {
                 const res = await response.json()
                 const {...token} = res.body
                 if (isRemember === true) {
-                    // ref.current = token.token
                     window.sessionStorage.setItem("token", token.token)
-                    // const sessionStorage = window.sessionStorage
-                    // console.log("session token : ", sessionStorage.getItem("token"))
-                    // dispatch(remember({...user, isRemember: isRemember}))
                 }
                 dispatch(createToken({...user, ...token}))
                 navigate('/profile', {replace: true})
             } catch (error) {
-                console.log("Erreur dans fetchToken : ", error)
-                navigate('/', {replace: true})
+                navigate('/error', {replace: true})
             }
         }
         fetchToken()
@@ -67,11 +62,6 @@ export function Login() {
                     <div className="input-remember">
                         <input type="checkbox" id="remember"/><label htmlFor="remember">Remember me</label>
                     </div>
-                    {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-                    {/* <NavLink to="/profile" >
-                        <div className="sign-in-button">Sign In</div>
-                    </NavLink> */}
-                    {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
                     <button type="submit" className="sign-in-button">Sign In</button>
                 </form>
             </section>

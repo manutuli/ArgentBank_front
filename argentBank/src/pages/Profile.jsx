@@ -1,14 +1,15 @@
 import { useState, } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createUser, login } from "../redux/features/authentication/authSlice"
+import { createUser, login, } from "../redux/features/authentication/authSlice"
 import { EditNameForm } from "../components/EditNameForm"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { AuthLayer } from "../components/AuthLayer"
 // 
 export function Profile(){
-    const [isHidden, setHidden] = useState(true)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const user = useSelector((state) => state.authentication.value)
+    const [isHidden, setHidden] = useState(true)
     //
     const token = user.token
     if (!token) return <AuthLayer/>
@@ -33,7 +34,7 @@ export function Profile(){
             dispatch(login({...user, isLogged : true}))
             dispatch(createUser({...user, data : data}))
         } catch (error) {
-            console.log("Erreur dans fetchProfile : ", error)
+            navigate('/error', {replace: true})
         }
     }
     fetchProfile()

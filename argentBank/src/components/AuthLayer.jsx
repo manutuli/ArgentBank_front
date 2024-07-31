@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createToken, 
+import { 
+    createToken, 
     login, 
-    // remember, 
     createUser,
  } from "../redux/features/authentication/authSlice";
 // 
@@ -17,7 +17,6 @@ export function AuthLayer(){
             session.clear()
             dispatch(createToken({...user, token: null}))
             dispatch(login({...user, isLogged: false}))
-            // dispatch(remember({...user, isRemember: false}))
             dispatch(createUser({...user, data: null}))
             navigate("/", {replace: true})
         }
@@ -28,6 +27,5 @@ export function AuthLayer(){
             console.log("going home !")
             disconnect()
         }
-        // navigate("/", {replace: true});
     })
 }
