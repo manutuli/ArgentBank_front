@@ -145,7 +145,10 @@ body, #root {
     flex-direction: row;
   }
 }
+.feature-tree {
+  width: 400px;
 
+}
 .feature-icon {
   width: 100px;
   border: 10px solid var(--color-blue);

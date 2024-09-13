@@ -1,15 +1,15 @@
 import { useState, } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createUser, login, } from "../redux/features/authentication/authSlice"
-import { EditNameForm } from "../components/EditNameForm"
 import { useNavigate } from "react-router-dom"
 import { AuthLayer } from "../components/AuthLayer"
+import { GreetUser } from "../components/GreetUser.jsx"
 // 
 export function Profile(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [isFormHidden, setFormHidden] = useState(true)
     const user = useSelector((state) => state.authentication.value)
-    const [isHidden, setHidden] = useState(true)
     //
     const token = user.token
     if (!token) return <AuthLayer/>
@@ -42,17 +42,7 @@ export function Profile(){
         <>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />{isHidden ? user.data?.firstName : null}</h1>
-                    {
-                        isHidden 
-                        ? <button 
-                            onClick={() => {isHidden ? setHidden(false) : setHidden(true)}} 
-                            className="edit-button"
-                        >
-                            Edit Name
-                        </button>
-                        : <EditNameForm/> 
-                    }
+                    <GreetUser isFormHidden={isFormHidden} onFormHidden={setFormHidden} />
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">

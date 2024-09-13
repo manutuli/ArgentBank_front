@@ -1,14 +1,9 @@
 import { loginFormValidation } from "../utils/loginFormValidation";
 import { useDispatch, useSelector } from "react-redux";
-import { 
-    createToken, 
-    // createError,
- } from "../redux/features/authentication/authSlice";
+import { createToken } from "../redux/features/authentication/authSlice";
 import { useNavigate } from "react-router-dom";
-// import { useRef } from "react";
 // 
 export function Login() {
-    // const ref = useRef(0)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.authentication.value)

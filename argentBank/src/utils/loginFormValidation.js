@@ -3,7 +3,6 @@ export const loginFormValidation = (event) => {
         event.email.checkValidity() &&
         event.password.checkValidity() 
     ) {
-        // console.log("pass : ", event.password.value)
         return {
             email : event.email.value,
             password : event.password.value,

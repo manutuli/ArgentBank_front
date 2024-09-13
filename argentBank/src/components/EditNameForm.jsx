@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux"
+import PropTypes from "prop-types"
 import { createUser, } from "../redux/features/authentication/authSlice"
 import { editNameFormValidation } from "../utils/editNameFormValidation"
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export function EditNameForm(){
+export function EditNameForm({
+    isFormHidden,
+    onFormHidden,
+}){
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.authentication.value)
     const navigate = useNavigate()
-    const [isSuccess, setIsSuccess]= useState(false)
+    const user = useSelector((state) => state.authentication.value)
     // 
     function submit(e){
         e.preventDefault()
@@ -38,19 +40,16 @@ export function EditNameForm(){
                         lastName: lastName, 
                     }
                 }))
-                setIsSuccess(true)
             } catch (error) {
-                // dispatch(createError({...user, isError: true}))
-                // console.log("Erreur dans fetchName : ", error)
                 navigate('/error', {replace: true})
             }
         }
         fetchName()
     }
-    // if (user.isError) return dispatch(createError({...user, isError: false}));
     return (
         <>
-        {isSuccess
+        {isFormHidden
+        // isSuccess
         ? <p>Your last name is {user.data.lastName} !</p>
         : <section className="edit-name-wrapper">
             <i className="fa fa-user-circle sign-in-icon"></i>
@@ -68,15 +67,21 @@ export function EditNameForm(){
                 </div>
                 <div className="edit-name-content"> 
                     <button type="submit" className="edit-name-button">Save</button>
-                    <button className="edit-name-button" onClick={()=>setIsSuccess(true)}>Cancel</button>
+                    <button className="edit-name-button" onClick={()=>onFormHidden(true)}>Cancel</button>
                 </div>
     
             </form>
         </section>
         }
-        {isSuccess 
-         && <div className="" ><button className="edit-button" onClick={()=>setIsSuccess(false)}>Edit Name</button></div> 
+        {isFormHidden
+        // isSuccess 
+         && <div className="" ><button className="edit-button" onClick={()=>onFormHidden(false)}>Edit Name</button></div> 
         }
         </>
     )
 }
+EditNameForm.propTypes = {
+    isFormHidden: PropTypes.bool,
+    onFormHidden: PropTypes.func,
+};
+// export default EditNameForm;

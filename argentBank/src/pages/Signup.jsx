@@ -1,11 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { signupFormValidation } from "../utils/signupFormValidation";
-// import { useDispatch, useSelector } from "react-redux";
 export function Signup() {
     const navigate = useNavigate()
-    // const dispatch = useDispatch()
-    // const user = useSelector((state) => state.authentication.value)
-    // 
     function submit(e) {
         e.preventDefault()
         const url = "http://localhost:3001/api/v1/user/signup"
@@ -29,11 +25,8 @@ export function Signup() {
                 const res = await response.json()
                 const {email} = res.body
                 console.log("signup credentials : ", email)
-                // useEffect ?
                 navigate("/login", {replace: true})
             } catch (error) {
-                // dispatch(createError({...user, isError: true}))
-                // console.log("Dans fetch signup", error)
                 navigate('/error', {replace: true})
             }
         }
