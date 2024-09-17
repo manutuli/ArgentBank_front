@@ -2,7 +2,7 @@ export const Landing = () => {
     return (
         <main>
         <div className="hero">
-        <img src="./assets/img/bank-tree.jpeg" alt="bank tree" className="feature-tree" />
+        {/* <img src="./assets/img/bank-tree.jpeg" alt="bank tree" className="feature-tree" /> */}
           <section className="hero-content">
             <h2 className="sr-only">Promoted Content</h2>
             <p className="subtitle">No fees.</p>

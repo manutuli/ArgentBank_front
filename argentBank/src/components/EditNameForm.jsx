@@ -5,7 +5,7 @@ import { editNameFormValidation } from "../utils/editNameFormValidation"
 import { useNavigate } from "react-router-dom"
 
 export function EditNameForm({
-    isFormHidden,
+    // isFormHidden,
     onFormHidden,
 }){
     const dispatch = useDispatch()
@@ -30,8 +30,8 @@ export function EditNameForm({
             try {
                 const response = await fetch(request)
                 const res = await response.json()
-                const {id, email, firstName, lastName,} = res.body
-                console.log("new credentials : ", email, id, firstName, lastName)
+                const {firstName, lastName,} = res.body
+                // console.log("new credentials : ", firstName, lastName)
                 dispatch(createUser({
                     ...user, 
                     data: {
@@ -45,13 +45,11 @@ export function EditNameForm({
             }
         }
         fetchName()
+        onFormHidden(true)
     }
     return (
         <>
-        {isFormHidden
-        // isSuccess
-        ? <p>Your last name is {user.data.lastName} !</p>
-        : <section className="edit-name-wrapper">
+        { <section className="edit-name-wrapper">
             <i className="fa fa-user-circle sign-in-icon"></i>
             {/* <h2>Please enter your name : </h2> */}
             <form  onSubmit={submit}>
@@ -73,15 +71,15 @@ export function EditNameForm({
             </form>
         </section>
         }
-        {isFormHidden
+        {/* {isFormHidden
         // isSuccess 
          && <div className="" ><button className="edit-button" onClick={()=>onFormHidden(false)}>Edit Name</button></div> 
-        }
+        } */}
         </>
     )
 }
 EditNameForm.propTypes = {
-    isFormHidden: PropTypes.bool,
+    // isFormHidden: PropTypes.bool,
     onFormHidden: PropTypes.func,
 };
 // export default EditNameForm;

@@ -13,10 +13,11 @@ export function Login() {
         e.preventDefault()
         const form = loginFormValidation(e.target) 
         const isRemember = form.isRemember
+        const session = window.sessionStorage
         const url = "http://localhost:3001/api/v1/user/login"
         const fetchToken = async () => {
             try {
-                if (user.token) controller.abort()
+                if (user.token) controller.abort();
                 const response = await fetch(new Request(url, {
                         method : "POST",
                         headers : {
@@ -29,7 +30,7 @@ export function Login() {
                 const res = await response.json()
                 const {...token} = res.body
                 if (isRemember === true) {
-                    window.sessionStorage.setItem("token", token.token)
+                    session.setItem("token", token.token)
                 }
                 dispatch(createToken({...user, ...token}))
                 navigate('/profile', {replace: true})

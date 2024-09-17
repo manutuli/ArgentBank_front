@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+// import { NavLink } from "react-router-dom"
 import { 
     createToken, 
     createUser, 
@@ -19,6 +20,8 @@ export function LogoutBtn () {
         navigate("/", {replace: true})
     }
     return (
-        <div className="logout-btn-container"><p onClick={disconnect} >Log Out</p></div>
+        <a className="logout-btn-container" onClick={disconnect} > Log Out
+            {/* <div ><p onClick={disconnect} >Log Out</p></div> */}
+        </a>
     )
 }

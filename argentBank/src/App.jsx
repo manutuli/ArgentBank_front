@@ -22,15 +22,20 @@ export function App() {
         <div className="main-nav-item">
           {
             user.isLogged 
-            ? <NavLink to="/profile" ><p>{user.data.firstName}</p></NavLink>
-            : <NavLink to="/signup" ><p>Sign Up</p></NavLink>
+            ? <NavLink to="/profile" >{user.data.firstName}</NavLink>
+            : <NavLink to="/signup" >Sign Up</NavLink>
           }
         </div>
         <div className="main-nav-item">
           { 
             user.isLogged 
             ? <LogoutBtn/> 
-            : <NavLink to="/login" ><p>Sign In</p></NavLink> 
+            : <> 
+            <NavLink to="/login" >
+            <i className="fa fa-user-circle"></i>
+            Sign In
+            </NavLink> 
+            </>
           }
         </div>
       </div>

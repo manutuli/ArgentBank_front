@@ -55,9 +55,13 @@ body, #root {
   color: var(--color-gray-dark);
 }
 
-.main-nav a.router-link-exact-active {
+.main-nav a.active {
   color: #42b983;
 }
+/* 
+.main-nav a.router-link-exact-active {
+  color: #42b983;
+} */
 
 .main-nav-content {
   display: flex;
@@ -83,7 +87,7 @@ body, #root {
 }
 
 .hero {
-  background-image: url('../img/bank-tree.jpeg');
+  background-image: url('./assets/img/bank-tree.jpeg');
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -205,7 +209,9 @@ body, #root {
   /* border: 2px solid salmon; */
   /* background-color: var(--color-white); */
 }
-
+.logout-btn-container {
+  cursor: pointer;
+}
 /* .edit-name-content > div {
   border: 2px solid blue;
 } */
